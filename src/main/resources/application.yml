@@ -1,0 +1,37 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: yongliandelixiang
+
+
+  servlet:
+    multipart:
+      enabled: true #开启文件上传
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+minio:
+  endpoint: http://121.199.76.75:9000 #Minio服务所在地址
+  bucketName: images #存储桶名称
+  accessKey: minioadmin #访问的key
+  secretKey: minioadmin #访问的秘钥
+
+#配置日志
+#logging:
+#  #此处存放日志的路径
+#  path:
+#    config: classpath:config/logback-spring.xml
+#  #指定不同目录下的日志的级别
+#  level:
+#    com.shimain.springboot.mapper: DEBUG
+# ------------------------------------------日志配置--------------------------------------------------
+logging:
+  level:
+    root: info
+    com.demo.springboot_demo: debug
+  file: logs/${spring.application.name}.log
+  pattern:
+    console: "%clr(%d{YYYY-MM-dd}){greed} [ %thread ] %clr(%-5level){red} => %clr(%logger{50}){blue} =>  %msg%n"
+    file: "%d{yyyy-MM-dd} [ %thread ] %-5level => %logger{50}- %msg%n"

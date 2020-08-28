@@ -15,7 +15,7 @@ public class loginController {
     @RequestMapping("/login")
     public String login(){
         System.out.println("===============");
-
+        int a=0/0;
         log.info("查询节点【{}】返回报文：{}", LogWriteUtils.getJsonStr("再见了我的大学"), LogWriteUtils.getJsonStr("再见了我的应科"));
         return "login";
     }

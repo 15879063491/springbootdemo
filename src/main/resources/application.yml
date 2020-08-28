@@ -27,11 +27,11 @@ minio:
 #  level:
 #    com.shimain.springboot.mapper: DEBUG
 # ------------------------------------------日志配置--------------------------------------------------
-logging:
-  level:
-    root: info
-    com.demo.springboot_demo: debug
-  file: logs/${spring.application.name}.log
-  pattern:
-    console: "%clr(%d{YYYY-MM-dd}){greed} [ %thread ] %clr(%-5level){red} => %clr(%logger{50}){blue} =>  %msg%n"
-    file: "%d{yyyy-MM-dd} [ %thread ] %-5level => %logger{50}- %msg%n"
+#logging:
+#  level:
+#    root: info
+#    com.demo.springboot_demo: debug
+#  file: logs/${spring.application.name}.log
+#  pattern:
+#    console: "%clr(%d{YYYY-MM-dd}){greed} [ %thread ] %clr(%-5level){red} => %clr(%logger{50}){blue} =>  %msg%n"
+#    file: "%d{yyyy-MM-dd} [ %thread ] %-5level => %logger{50}- %msg%n"

@@ -3,13 +3,584 @@
 <head>
     <meta charset="UTF-8">
     <title>八月的你好====================================</title>
+    <script src="/jquery-1.11.2.min.js" ></script>
+    <script src="/echarts.min.js"></script>
+    <style>
+        .flex-container {
+            display: -webkit-flex;
+            display: flex;
+            width: 100%;
+            height: 400px;
+            background-color: lightgrey;
+        }
+
+        .flex-item {
+            width: 33%;
+            height: 100%;
+            margin-left: 20px;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
-        <h1>八月的你好====================================</h1>
-        <h1>生活就像一场梦</h1>
-        <h2>恭喜你闯入我的生活</h2>
-        <h1>祝贺我家的小猪猪成功上岸，迎接崭新的一天！嘻嘻</h1>
-                                <h3>罗哥</h3>
+<!--        <h1>八月的你好====================================</h1>-->
+<!--        <h1>生活就像一场梦</h1>-->
+<!--        <h2>恭喜你闯入我的生活</h2>-->
+<!--        <h1>祝贺我家的小猪猪成功上岸，迎接崭新的一天！嘻嘻</h1>-->
+<!--                                <h3>罗哥</h3>-->
+<!--    <img src="http://121.199.76.75:9000/images/showImages.png">-->
+<!--    <img src="http://121.199.76.75:9000/images/2.jpg">-->
+<!--    <img src="http://localhost:8085/showImages">-->
+<div id="image">
+    <img src= "http://127.0.0.1:8085/img/3.png"  alt="logo">
+</div>
+        <div class="flex-container">
+            <div id="main"  class="flex-item" ></div>
+            <div id="mix"  class="flex-item" ></div>
+            <div id="chart_6" class="flex-item"></div>
+        </div>
+        <p style="height: 30px"></p>
+        <div class="flex-container">
+            <div id="chart_5"  class="flex-item" ></div>
+            <div id="mix1"  class="flex-item" ></div>
+            <div id="chart_61" class="flex-item"></div>
+        </div>
+<script type="text/javascript" >
 
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+
+            var option = {
+                title: {
+                    text: 'ECharts'
+                },
+                tooltip: {
+                    show : true,
+                    trigger : 'axis',
+                    axisPointer: { type: 'shadow' },
+                    formatter: function(value, index) {
+                        return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
+                            '</div>' +
+                            '占比：' +100+ '%<br>' +
+                            '人数：' + 1000 + '人<br>';
+                    }
+
+                },
+                legend: {
+
+                    data:['销量']
+                },
+                xAxis: {
+
+                    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            var list=[50,300,71,53,66,85,200]
+            let colors = ['#1890FF', '#27CAFF'];
+            let splitNumber = 5;//分割线
+            var mixChart=echarts.init(document.getElementById('mix'));
+            var option1={
+                color: colors,
+                title: {
+                    text: '近一个月用户访问情况',
+                    subtext: '2020-09-18至2020-10-18',
+                    link: 'http://121.199.76.75:8888/login?from=%2Fview%2Fall%2Fjob%2Fspringboot%2F',
+                    target: 'blank', //指定新窗口打开超链接
+                    //targer: 'self',  //指定当前窗口打开超链接
+                    x: 'left',
+                    textStyle: { color: 'black', fontSize: '18', fontWeight: 'bold'},
+                    subtextStyle: { color: 'grey', fontSize: '12', lineHeight: 18 }
+                },
+                grid: {
+                    top: '30%',
+                    bottom: '10%',
+                    left: '10%',
+                    right: '5%',
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { type: 'shadow' },
+                    formatter: function(value, index) {
+
+                        return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
+                            '</div>' +
+                            '占比：' + 50 + '%<br>' +
+                            '人数：' + 100 + '人<br>';
+                    }
+
+                },
+                xAxis: {
+                    type: 'category',
+                    axisTick: { show: false },
+                    axisLabel: {
+                        textStyle: { color: '#333333', fontSize: 14 }
+                    },
+                    axisLine: {
+                        show: false,
+                        lineStyle: { color: '#1890FF' }
+                    },
+                    data: ['1次', '2~4次', '5~10次', '大于10次']
+                },
+                yAxis: [{
+                    type: 'value',
+                    position: 'left',
+                    offset: 0,
+                    min: 0,
+                    max: 100,
+                    splitNumber: splitNumber,
+                    interval: (100 - 0) / splitNumber,
+                    splitLine: {
+                        lineStyle: { type: 'dashed', color: '#707070' }
+                    },
+                    axisLine: { show: false },
+                    axisLabel: {
+                        formatter: function(value, index) {
+                            return 20 + '%';
+                        },
+                        textStyle: { color: "#333333", fontSize: 14 }
+                    },
+                    axisTick: { show: false }
+                }],
+                series: [{
+                    type: 'bar',
+                    barWidth: '40%',
+                    data: list,//可替换为mock
+                    label: {
+                        formatter: function(value, index) {
+                            return 20 + '% ' + 1000;
+                        },
+                        show: true,
+                        position: "top",
+                        distance: 10,
+                        color: "black",
+                    },
+                }]
+            };
+
+            mixChart.setOption(option1);
+
+
+            chart_6 ()
+
+            function chart_6 () {
+                var myChart = echarts.init(document.getElementById('chart_6'));
+
+                let data = {
+                    num: [300,200,100,100],
+                    num1: [1000,500,600,400]
+                }
+
+                let all = data.num.reduce(function(prev,cur,index,array){
+                    return prev + cur
+                })
+
+                let all1 = data.num1.reduce(function(prev,cur,index,array){
+                    return prev + cur
+                })
+
+                all = all + all1
+
+                let list = []
+                let list1 = []
+
+
+                data.num.forEach((item,index,array)=>{
+                    return list.push((item / all * 100).toFixed(2))
+                })
+
+                data.num1.forEach((item,index,array)=>{
+                    return list1.push((item / all * 100).toFixed(2))
+                })
+                console.log(list)
+                console.log(list1)
+                let colors = ['#FF9900','#00CC99'];
+                let color = '#00CC99';
+                let splitNumber = 5;//分割线
+
+                option = {
+                    color: colors,
+                    legend: {
+                        data: ['Lv1', 'Lv2'],
+                        bottom: '0',
+                        textStyle: {
+                            color: "#434e79",
+                            fontSize: 14,
+                            fontWeight: 400
+                        },
+                        itemWidth: 14,
+                        itemHeight: 14,
+                        itemGap: 35
+                    },
+                    title: {
+                        text: '近一个月充电时长情况',
+                        subtext: '2020-08-18至2020-09-18 \n总计：10000人  平均月充电时长：100000小时/人\n单位：人',
+                        x: 'left',
+                        textStyle: { color: 'black', fontSize: '18', fontWeight: 'bold'},
+                        subtextStyle: { color: 'grey', fontSize: '12', lineHeight: 18 }
+                    },
+                    grid: {
+                        top: '30%',
+                        bottom: '15%',
+                        left: '10%',
+                        right: '5%',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { type: 'shadow' },
+                        formatter: function(value, index) {
+                            let html = '';
+                            html = '<div style="color: white;font-size: 14px;line-height: 24px">' + value[0]["axisValueLabel"] + '<br/>' +
+                                '<div style=" display:inline-block; width: 10px;height: 10px;background-color: #00CC99; border: #00CC99"></div>  '+'<span>' + value[0]["value"] + '%   '+ data.num1[value[0]["dataIndex"]] +'人</span><br/>' +
+                                '<div style="display:inline-block;width: 10px;height: 10px;background-color: #FF9900; border: #FF9900"></div>  '+'<span>' + value[1]["value"] + '%   '+ data.num[value[1]["dataIndex"]] +'人</span></div>';
+                            return html;
+                        }
+
+                    },
+                    xAxis: {
+                        type: 'category',
+                        axisTick: { show: false },
+                        axisLabel: {
+                            textStyle: { color: '#333333', fontSize: 14 }
+                        },
+                        axisLine: {
+                            show: false,
+                            lineStyle: { color: '#1890FF' }
+                        },
+                        data: ['1~5小时', '6~15小时', '16~24小时','大于24小时']
+                    },
+                    yAxis: [{
+                        type: 'value',
+                        position: 'left',
+                        offset: 0,
+                        min: 0,
+                        max: 50,
+                        splitNumber: splitNumber,
+                        interval: (50 - 0) / splitNumber,
+                        splitLine: {
+                            lineStyle: { type: 'dashed', color: '#707070' }
+                        },
+                        axisLine: { show: false },
+                        axisLabel: {
+                            formatter: function(value, index) {
+                                return parseInt(value) + '%';
+                            },
+                            textStyle: { color: "#333333", fontSize: 14 }
+                        },
+                        axisTick: { show: false }
+                    }],
+                    series: [
+                        {
+                            name: 'Lv1',
+                            type: 'bar',
+                            barWidth: '40%',
+                            barGap: '-100%',
+                            z: 1,
+                            data: list1,//可替换为mock
+                            itemStyle: {
+                                color: color
+                            },
+                            // label: {
+                            //     formatter: function(value, index) {
+                            //         return value["value"] + '% ' + data.num1[value["dataIndex"]] + "人";
+                            //     },
+                            //     show: true,
+                            //     position: "top",
+                            //     distance: 10,
+                            //     color: "black",
+                            // },
+                        },
+                        {
+                            name: 'Lv2',
+                            type: 'bar',
+                            barWidth: '40%',
+                            z: 2,
+                            data: list,//可替换为mock
+                            // label: {
+                            //     formatter: function(value, index) {
+                            //         return value["value"] + '% ' + data.num[value["dataIndex"]] + "人";
+                            //     },
+                            //     show: true,
+                            //     position: "top",
+                            //     distance: 10,
+                            //     color: "black",
+                            // },
+                        }
+                    ]
+                };
+
+                myChart.setOption(option);
+            }
+
+            chart_5 ()
+            function chart_5 () {
+                var myChart = echarts.init(document.getElementById('chart_5'));
+                var data = [{
+                    "name": "福州",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[15, 10],
+                    "symbolSize": 230,
+                },
+                {
+                    "name": "厦门",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[30, 5],
+                    "symbolSize": 30,
+                },
+                {
+                    "name": "泉州",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[0, 30],
+                    "symbolSize": 30,
+                },
+                {
+                    "name": "漳州",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[37, 25],
+                    "symbolSize": 30,
+                },
+                {
+                    "name": "莆田",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[10, 35],
+                    "symbolSize": 30,
+                },
+                {
+                    "name": "南平",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[0, 7],
+                    "symbolSize": 30,
+                },
+                {
+                    "name": "三明",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[25, 35],
+                    "symbolSize": 30,
+                },
+                {
+                    "name": "龙岩",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[43, 7],
+                    "symbolSize": 30,
+                },
+                {
+                    "name": "宁德",
+                    "val": 2373,
+                    "time":"2020-09-10 09:55",
+                    "proportion":"25.52%",
+                    "value":[50, 27],
+                    "symbolSize": 30,
+                }];
+
+                var colorList = [
+                    [
+                    '#ff7f50', '#87cefa', '#da70d6', '#32cd32', '#6495ed',
+                    '#ff69b4', '#ba55d3', '#cd5c5c', '#ffa500', '#40e0d0',
+                    '#1e90ff', '#ff6347', '#7b68ee', '#d0648a', '#ffd700',
+                    '#6b8e23', '#4ea397', '#3cb371', '#b8860b', '#7bd9a5'
+                    ],
+                    [
+                        '#ff7f50', '#87cefa', '#da70d6', '#32cd32', '#6495ed',
+                        '#ff69b4', '#ba55d3', '#cd5c5c', '#ffa500', '#40e0d0',
+                        '#1e90ff', '#ff6347', '#7b68ee', '#00fa9a', '#ffd700',
+                        '#6b8e23', '#ff00ff', '#3cb371', '#b8860b', '#30e0e0'
+                    ],
+                    [
+                        '#929fff', '#9de0ff', '#ffa897', '#af87fe', '#7dc3fe',
+                        '#bb60b2', '#433e7c', '#f47a75', '#009db2', '#024b51',
+                        '#0780cf', '#765005', '#e75840', '#26ccd8', '#3685fe',
+                        '#9977ef', '#f5616f', '#f7b13f', '#f9e264', '#50c48f'
+                    ]
+                                ][2];
+
+                var datas = [];
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    datas.push({
+                        name: item.name,
+                        time: item.time,
+                        val: item.val,
+                        proportion: item.proportion,
+                        value: item.value,
+                        symbolSize: item.symbolSize,
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    fontSize: 14,
+                                    color: "black"
+                                }
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                // "shadowBlur": 100,
+                                // "shadowColor": colorList[1],
+                                "color": colorList[0]
+                            }
+                        }
+                    });
+                }
+                var option = {
+                    title: {
+                        text: '实时车辆位置密度分布',
+                        subtext:'',
+                        x: 'left',
+                        textStyle: { color: 'black', fontSize: '18', fontWeight: 'bold'},
+                        subtextStyle: { color: 'grey', fontSize: '12', lineHeight: 18 }
+                    },
+                    grid: {
+                        show: false,
+                    },
+                    tooltip: {
+                        padding: 10,
+                        backgroundColor: '#222',
+                        borderColor: '#777',
+                        borderWidth: 1,
+                        formatter: function(obj) {
+                            var value = obj.value;
+                            return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
+                                obj.name +
+                                '</div>' +
+                                '车辆：' + obj.data.val + '辆<br>' +
+                                '占比：' + obj.data.proportion + '<br>' +
+                                '更新时间：' + obj.data.time + '<br>';
+                        }
+                    },
+                    xAxis: [{
+                        gridIndex: 0,
+                        type: "value",
+                        show: false,
+                        nameLocation: "middle",
+                        nameGap: 5
+                    }],
+                    yAxis: [{
+                        gridIndex: 0,
+                        show: false,
+                        nameLocation: "middle",
+                        nameGap: 30
+                    }],
+                    series: [{
+                        type: "scatter",
+                        symbol: "circle",
+                        symbolSize: 120,
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: "{b}",
+                                color: "#fff",
+                                textStyle: {
+                                    fontSize: "20"
+                                }
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: "#00acea"
+                            }
+                        },
+                        data: datas
+                    }]
+                };
+
+                myChart.setOption(option);
+            }
+            mix1();
+            function mix1() {
+
+                var myChart = echarts.init(document.getElementById('mix1'));
+                var option={
+                    title:{
+                        show:true,
+                        text: '趋势对比',
+                        x: 'left',
+                        textStyle: {
+                            fontSize: 10,
+                            color: '#ff7f50'
+
+                        },
+                    },
+                    grid: {
+                        show: true,
+                        zlevel: 2
+                    },
+                    //弹窗相关信息
+                    tooltip:{
+                        show: true
+
+                    },
+                    //X轴相关信息
+                    xAxis:{
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                    },
+                    //Y轴相关信息
+                    yAxis:{
+                        type: 'value'
+                    },
+                    //决定图标类型
+                    series:[
+                        {
+                            name: '邮件营销',
+                            type: 'line',
+                            stack: '总量',
+                            data: [120, 132, 101, 134, 90, 230, 210]
+                        },
+                        {
+                            name: '联盟广告',
+                            type: 'line',
+                            stack: '总量',
+                            data: [220, 182, 191, 234, 290, 330, 310]
+                        },
+                        {
+                            name: '视频广告',
+                            type: 'line',
+                            stack: '总量',
+                            data: [150, 232, 201, 154, 190, 330, 410]
+                        },
+                        {
+                            name: '直接访问',
+                            type: 'line',
+                            stack: '总量',
+                            data: [320, 332, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            name: '搜索引擎',
+                            type: 'line',
+                            stack: '总量',
+                            data: [820, 932, 901, 934, 1290, 1330, 1320]
+                        }
+                    ]
+                };
+
+                myChart.setOption(option);
+            }
+
+
+</script>
 </body>
 </html>

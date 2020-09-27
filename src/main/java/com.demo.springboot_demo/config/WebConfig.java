@@ -11,6 +11,6 @@ public class WebConfig implements WebMvcConfigurer {
     // 2 html 中 <img src="http://localhost:8080/img/luffy.jpg">
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/img/**").addResourceLocations("file:/data/aws_s3/images");
+        registry.addResourceHandler("/img/**").addResourceLocations("/data/aws_s3/images");
     }
 }
